@@ -1,0 +1,6 @@
+id=duchamp_widevine_l1
+name=Duchamp Widevine L1 Fix
+version=v1.0
+versionCode=1
+author=Amon
+description=Spoof Widevine systemId 30770->30771 so Netflix gets L1 on Poco X6 Pro (duchamp). Port of device_xiaomi_duchamp@094a6a3.
