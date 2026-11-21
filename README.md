@@ -1,6 +1,8 @@
-# Fix Netflix L1 – Duchamp
+# Fix Netflix L1
 
-KernelSU / Magisk / APatch module that fixes Netflix falling back to Widevine L3 on the **Poco X6 Pro (duchamp)**, even though the device supports L1.
+KernelSU / Magisk / APatch module that fixes Netflix falling back to Widevine L3 on devices that actually support L1.
+
+Originally made for the **Poco X6 Pro (duchamp)**, but it may also work on other devices with the same problem (see [Other devices](#other-devices)).
 
 ## What it fixes
 
@@ -16,6 +18,14 @@ AOSP ROMs that already include the fix (e.g. Infinity X) don't need this module.
 - HyperOS 3
 - PixelOS (AOSP)
 
+## Other devices
+
+Even though the repository name mentions Duchamp, this module may also work on other devices that have a similar issue. Feel free to test it, it might just work for you.
+
+It only takes effect if your device reports Widevine system ID `30770` (check it in Netflix → Settings → Playback Specification, or by clearing data and reopening the app). If your device reports a different ID, the module does nothing until you change the IDs in `src/liboemcrypto_shim.c` and rebuild.
+
+Results on other devices are welcome, please open an issue and tell us what you tested.
+
 ## How it works
 
 Netflix rejects Widevine system ID `30770` and falls back to L3. This module reports the system ID as `30771` instead, which Netflix accepts.
@@ -30,7 +40,7 @@ Unlike the original commit, the shim finds the hook slot by symbol name instead 
 
 ## Install
 
-1. Download `duchamp_widevine_l1.zip` from [Releases](../../releases).
+1. Download `fix_netflix_l1.zip` from [Releases](../../releases).
 2. Flash it in your root manager (KernelSU, Magisk or APatch).
 3. Reboot.
 4. Clear Netflix data (Settings → Apps → Netflix → Storage → Clear data).
@@ -42,14 +52,13 @@ Remove the module in your root manager and reboot.
 
 ## Requirements
 
-- Poco X6 Pro (duchamp), arm64
+- arm64 device that supports Widevine L1
 - Root with module support
 - `/vendor/lib64/liboemcrypto.so` present
 
 ## Notes
 
 - This only changes the **system ID reported to apps**. It does not give L1 to a device that doesn't support it.
-- Other devices with the same issue may have a different system ID. The module does nothing unless the ID is `30770`. Change the IDs in `src/liboemcrypto_shim.c` and rebuild if you want to experiment.
 - If the patched library fails to load, Widevine may stop working. Remove the module to restore stock behavior.
 
 ## Build from source
@@ -60,7 +69,7 @@ Needs `clang` with `lld`, `patchelf` and `zip` on the host:
 ./build.sh
 ```
 
-The output is `duchamp_widevine_l1.zip`.
+The output is `fix_netflix_l1.zip`.
 
 ## Credits
 
@@ -75,7 +84,9 @@ Use at your own risk. Not affiliated with Xiaomi, Netflix or Google.
 
 ## Bahasa Indonesia
 
-Module untuk memperbaiki Widevine yang turun ke L3 di Netflix pada Poco X6 Pro (duchamp), yaitu setelah aplikasi ditutup lalu dibuka lagi.
+Module untuk memperbaiki Widevine yang turun ke L3 di Netflix pada perangkat yang sebenarnya mendukung L1, yaitu setelah aplikasi ditutup lalu dibuka lagi.
+
+Walaupun judul repository ini ditujukan untuk Duchamp, kemungkinan module ini juga bekerja di perangkat lain yang mengalami masalah serupa. Kamu bisa coba tes, siapa tahu berhasil. Module hanya berpengaruh kalau system ID perangkatmu `30770`.
 
 **Bisa dipakai di:** stock atau custom ROM, termasuk HyperOS (stock atau mod) dan AOSP yang tidak punya fitur spoof Netflix bawaan.
 
