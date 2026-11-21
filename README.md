@@ -12,7 +12,7 @@ This module works on both stock and custom ROMs:
 - HyperOS (stock or modded)
 - AOSP-based ROMs that don't include a built-in Netflix spoof
 
-AOSP ROMs that already include the fix (e.g. Infinity X) don't need this module.
+AOSP ROMs that already include the fix (e.g. Axion & Infinity X November Update) don't need this module.
 
 **Tested on duchamp with:**
 - HyperOS 3
