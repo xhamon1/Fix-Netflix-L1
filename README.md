@@ -50,6 +50,28 @@ Unlike the original commit, the shim finds the hook slot by symbol name instead 
 
 Remove the module in your root manager and reboot.
 
+## Non-root (experimental)
+
+A separate Xposed module, `fix_netflix_l1_xposed.apk`, hooks Netflix directly instead of patching the system, so it can be used **without root** through [LSPatch](https://github.com/JingMatrix/LSPatch). It can also be used with LSPosed on rooted devices.
+
+**Status: experimental and untested by the author. It may not work, and test reports are welcome (please open an issue).** It only covers the Java `MediaDrm` API. If Netflix reads the system ID through native code, nothing changes.
+
+Steps:
+1. Install the LSPatch manager.
+2. Download `fix_netflix_l1_xposed.apk` from [Releases](../../releases) and install it normally.
+3. Export your installed Netflix APKs (base + splits).
+4. In LSPatch, patch Netflix and embed the "Fix Netflix L1 (Xposed)" module.
+5. Uninstall the original Netflix, then install the patched one (the signature is different, so the original cannot be updated in place).
+6. Open Netflix → Settings → Playback Specification and check for `Widevine: L1` and `System ID: 30771`.
+
+Limitations:
+- The patched Netflix cannot be updated from the Play Store. You need to patch the new version each time.
+- Netflix may refuse to run a modified app.
+- Do not use this together with the root module. Disable one of them when testing.
+- Patched Netflix APKs are not distributed here. Patch your own copy.
+
+Source: `fix_netflix_l1_xposed_src.zip` in the release assets.
+
 ## Requirements
 
 - arm64 device that supports Widevine L1
