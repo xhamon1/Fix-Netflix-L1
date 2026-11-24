@@ -1,6 +1,7 @@
 id=fix_netflix_l1
 name=Fix Netflix L1
-version=v1.0.1
-versionCode=2
+version=v1.0.2
+versionCode=3
 author=xhamon1
 description=Fixes Netflix falling back to Widevine L3 by reporting systemId 30770 as 30771. Made for Poco X6 Pro (duchamp), may work on similar devices. Port of device_xiaomi_duchamp@094a6a3.
+updateJson=https://raw.githubusercontent.com/xhamon1/Fix-Netflix-L1/main/update.json
