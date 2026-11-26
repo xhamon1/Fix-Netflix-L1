@@ -1,6 +1,4 @@
 #!/system/bin/sh
-# Copy vendor liboemcrypto.so into the module overlay with the shim added as DT_NEEDED.
-# Re-runs only when the stock file changed (e.g. after an OTA).
 D=${1:-${0%/*}}
 SRC=${SRC:-/vendor/lib64/liboemcrypto.so}
 P=${PATCHELF:-$D/patchelf}

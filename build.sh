@@ -1,5 +1,4 @@
 #!/bin/sh
-# Rebuild the arm64 shim and the flashable zip. Needs: clang (+lld), patchelf (host), zip.
 set -e
 cd "$(dirname "$0")"
 clang --target=aarch64-linux-android21 -fuse-ld=lld -shared -fPIC -O2 -fno-stack-protector \
